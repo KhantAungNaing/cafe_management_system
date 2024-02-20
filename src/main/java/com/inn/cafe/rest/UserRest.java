@@ -15,14 +15,23 @@ import com.inn.cafe.wrapper.UserWrapper;
 public interface UserRest {
 
 	@PostMapping(path = "/signup")
-	public ResponseEntity<String> signUp(@RequestBody(required = true)Map<String, String> requestMap);
-	
+	public ResponseEntity<String> signUp(@RequestBody(required = true) Map<String, String> requestMap);
+
 	@PostMapping(path = "/login")
 	public ResponseEntity<String> login(@RequestBody(required = true) Map<String, String> requestMap);
-	
+
 	@GetMapping(path = "/get")
 	public ResponseEntity<List<UserWrapper>> getAllUsers();
-	
+
 	@PostMapping(path = "/update")
 	public ResponseEntity<String> update(@RequestBody(required = true) Map<String, String> requestMap);
+
+	@GetMapping(path = "/checktoken")
+	ResponseEntity<String> checkToken();
+
+	@PostMapping(path = "/changePassword")
+	ResponseEntity<String> changePassword(@RequestBody Map<String, String> requestMap);
+	
+	@PostMapping(path = "/forgotPassword")
+	ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> requestMap);
 }
