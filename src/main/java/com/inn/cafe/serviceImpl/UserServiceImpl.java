@@ -51,14 +51,14 @@ public class UserServiceImpl implements UserService {
 	EmailUtils emailUtils;
 
 	@Override
-	public ResponseEntity<String> signUp(Map<String, String> resquestMap) {
-		log.info("Inside signup {}", resquestMap);
+	public ResponseEntity<String> signUp(Map<String, String> requestMap) {
+		log.info("Inside signup {}", requestMap);
 		try {
-			if (validateSignUpMap(resquestMap)) {
-				User user = userDao.findByEmailId(resquestMap.get("email"));
+			if (validateSignUpMap(requestMap)) {
+				User user = userDao.findByEmailId(requestMap.get("email"));
 
 				if (Objects.isNull(user)) {
-					userDao.save(getUserFromMap(resquestMap));
+					userDao.save(getUserFromMap(requestMap));
 					return CafeUtils.getResponseEntity("Successfully Registered", HttpStatus.OK);
 				} else {
 					return CafeUtils.getResponseEntity("Email already exist.", HttpStatus.BAD_REQUEST);
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResponseEntity<String> login(Map<String, String> requestMap) {
-		log.info("Inside Login");
+		log.info("Inside Login {}", requestMap);
 		try {
 
 			Authentication auth = authenticationManager.authenticate(
